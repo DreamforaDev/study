@@ -1,6 +1,7 @@
 # android-movie
 
 ## [Figma](https://www.figma.com/design/dzSLq1WTd2bebZ70bBvccW/%EC%9A%B0%ED%85%8C%EC%BD%946%EA%B8%B0-Android?node-id=1-131&t=k6cQTbmCymPsD14f-0)
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/ae17048f-7cb1-41d6-8e5d-572293723337" />
 
 ## 기능 요구사항
 사용자는 영화 예매 시스템을 이용해 쉽고 빠르게 보고 싶은 영화를 예매할 수 있다.
@@ -18,3 +19,4 @@
 - 버튼은 클릭효과가 나도록 한다.
 - Button 을 사용하지 말고 CardView 또는 Material CardView 를 사용하여 Custom 한다.
 - 상단 Toolbar 도 Android Widget 인 Toolbar 를 사용하지말고 Custom 한다.
+
