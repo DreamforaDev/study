@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Movie</string>
+    <string name="movie_poster">poster</string>
+    <string name="btn_reservation">지금 예매</string>
 </resources>
