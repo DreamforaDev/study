@@ -6,4 +6,12 @@
     </style>
 
     <style name="Theme.Movie" parent="Base.Theme.Movie" />
+    <style name="RoundBottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/RoundBottomSheetStyle</item>
+    </style>
+
+    <style name="RoundBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/shape_botton_sheet</item>
+    </style>
+
 </resources>

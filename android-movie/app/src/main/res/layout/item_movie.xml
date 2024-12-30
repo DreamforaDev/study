@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
-        android:text="영화 제목"
+        android:text="@string/title"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/iv_poster"
@@ -32,7 +32,7 @@
         android:id="@+id/tv_release_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="상영일 : "
+        android:text="@string/release_time"
         android:textSize="12sp"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
@@ -47,7 +47,7 @@
         android:layout_marginTop="4dp"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
-        android:text="러닝 타임 : "
+        android:text="@string/runtime"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/iv_poster"
         app:layout_constraintTop_toBottomOf="@+id/tv_release_time" />
@@ -58,11 +58,13 @@
         android:layout_height="36dp"
         android:backgroundTint="@color/forestgreen"
         app:cardCornerRadius="5dp"
-        app:cardElevation="2dp"
+        app:cardElevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:rippleColor="@color/black"
-        app:strokeWidth="0dp">
+        app:rippleColor="#55000000"
+        app:strokeWidth="0dp"
+        android:clickable="true"
+        android:focusable="true">
 
         <TextView
             android:layout_width="wrap_content"
