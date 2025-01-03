@@ -1,16 +1,16 @@
 package com.example.movie
 
-sealed class ListItem{
+sealed class ListItem {
     data class MovieItem(
-        val series : Int,
-        val poster : Int,
-        val title : String,
-        val releaseTime : String,
+        val series: Int,
+        val poster: Int,
+        val title: String,
+        val releaseTime: String,
         val runtime: String
-    ):ListItem()
+    ) : ListItem()
 
     data class AdItem(
-        val adImg : Int,
-        val adUrl : String
-    ):ListItem()
+        val adImg: Int,
+        val adUrl: String
+    ) : ListItem()
 }

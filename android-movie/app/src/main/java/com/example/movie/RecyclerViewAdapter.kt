@@ -11,19 +11,18 @@ import com.example.movie.databinding.ItemMovieBinding
 
 class RecyclerViewAdapter(
     private val onMovieClickListener: (ListItem.MovieItem) -> Unit,
-    private val onButtonClickListener : (ListItem.MovieItem) -> Unit,
-    private val onAdClickListener : (ListItem.AdItem) -> Unit
-)
-    : ListAdapter<ListItem, RecyclerView.ViewHolder>(diffUtil) {
+    private val onButtonClickListener: (ListItem.MovieItem) -> Unit,
+    private val onAdClickListener: (ListItem.AdItem) -> Unit
+) : ListAdapter<ListItem, RecyclerView.ViewHolder>(diffUtil) {
 
-    inner class MovieItemHolder(val binding: ItemMovieBinding)
-        : RecyclerView.ViewHolder(binding.root){
+    inner class MovieItemHolder(val binding: ItemMovieBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: ListItem.MovieItem){
+        fun bind(item: ListItem.MovieItem) {
             binding.ivPoster.setImageResource(item.poster)
-            binding.tvTitle.text=item.title
-            binding.tvReleaseTime.text=item.releaseTime
-            binding.tvRuntime.text=item.runtime
+            binding.tvTitle.text = item.title
+            binding.tvReleaseTime.text = item.releaseTime
+            binding.tvRuntime.text = item.runtime
 
             binding.root.setOnClickListener {
                 onMovieClickListener(item)
@@ -37,8 +36,7 @@ class RecyclerViewAdapter(
 
     }
 
-    inner class AdItemHolder(val binding: ItemAdBinding)
-        :RecyclerView.ViewHolder(binding.root){
+    inner class AdItemHolder(val binding: ItemAdBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ListItem.AdItem) {
             binding.imgAd.setImageResource(item.adImg)
@@ -52,41 +50,42 @@ class RecyclerViewAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when(getItem(position)) {
-            is ListItem.MovieItem -> MOVIE_ITEM_TYPE
-            is ListItem.AdItem -> AD_ITEM_TYPE
+        return when (getItem(position)) {
+            is ListItem.MovieItem -> ViewType.MOVIE_ITEM.type
+            is ListItem.AdItem -> ViewType.AD_ITEM.type
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return when(viewType){
-            MOVIE_ITEM_TYPE -> {
-                val view = ItemMovieBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val viewTypeEnum = ViewType.fromInt(viewType)
+        return when (viewTypeEnum) {
+            ViewType.MOVIE_ITEM -> {
+                val view =
+                    ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 MovieItemHolder(view)
             }
-            AD_ITEM_TYPE -> {
-                val view = ItemAdBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+
+            ViewType.AD_ITEM -> {
+                val view = ItemAdBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 AdItemHolder(view)
             }
-            else -> throw IllegalArgumentException(TYPE_ERROR)
+
+            else -> throw IllegalArgumentException("Invalid view type: ${viewType}")
         }
 
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(val item = getItem(position)){
+        when (val item = getItem(position)) {
             is ListItem.MovieItem -> (holder as MovieItemHolder).bind(item)
             is ListItem.AdItem -> (holder as AdItemHolder).bind(item)
         }
     }
 
-    companion object{
-        private val MOVIE_ITEM_TYPE = 0
-        private val AD_ITEM_TYPE = 1
-        private val TYPE_ERROR = "타입 에러"
+    companion object {
 
-        val diffUtil = object : DiffUtil.ItemCallback<ListItem>(){
+        val diffUtil = object : DiffUtil.ItemCallback<ListItem>() {
             override fun areItemsTheSame(oldItem: ListItem, newItem: ListItem): Boolean {
                 return oldItem == newItem
             }
@@ -97,4 +96,5 @@ class RecyclerViewAdapter(
         }
     }
 }
+
 
