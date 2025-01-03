@@ -67,9 +67,8 @@ class RecyclerViewAdapter(
             ViewType.AD_ITEM -> {
                 val view = ItemAdBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 AdItemHolder(view)
-            }
 
-            else -> throw IllegalArgumentException("Invalid view type: ${viewType}")
+            }
         }
 
     }
