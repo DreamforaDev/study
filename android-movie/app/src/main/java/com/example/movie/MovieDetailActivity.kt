@@ -1,5 +1,6 @@
 package com.example.movie
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -38,19 +39,19 @@ class MovieDetailActivity : AppCompatActivity() {
                 "마법사들의 전쟁터가 되어버린 호그와트에서 해리는 싸움을 끝낼 수 있는 마지막 호크룩스에 대한 실마리를 얻는다."
     )
 
-    private var ticketsCount : Int = 1
+    private var ticketsCount: Int = 1
 
-        override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
         binding = ActivityMovieDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val posterResId = intent.getIntExtra("poster", -1)
-        val title = intent.getStringExtra("title") ?: "Unknown Title"
-        val releaseTime = intent.getStringExtra("release_time") ?: "Unknown Release Time"
-        val runtime = intent.getStringExtra("runtime") ?: "Unknown Runtime"
+        val posterResId = intent.getIntExtra(EXTRA_POSTER, -1)
+        val title = intent.getStringExtra(EXTRA_TITLE) ?: "Unknown Title"
+        val releaseTime = intent.getStringExtra(EXTRA_RELEASE_TIME) ?: "Unknown Release Time"
+        val runtime = intent.getStringExtra(EXTRA_RUNTIME) ?: "Unknown Runtime"
 
         if (posterResId != -1) {
             binding.ivPoster.setImageResource(posterResId)
@@ -63,7 +64,7 @@ class MovieDetailActivity : AppCompatActivity() {
             finish()
         }
 
-        when(val seriesNumber = intent.getIntExtra("seriesNumber",-1)){
+        when (val seriesNumber = intent.getIntExtra(EXTRA_SERIES_NUMBER, -1)) {
             1 -> binding.tvMovieDetail.text = movieDetailList[0]
             2 -> binding.tvMovieDetail.text = movieDetailList[1]
             3 -> binding.tvMovieDetail.text = movieDetailList[2]
@@ -75,7 +76,7 @@ class MovieDetailActivity : AppCompatActivity() {
         }
 
         binding.cvMinusBtn.setOnClickListener {
-            if(ticketsCount > 1){
+            if (ticketsCount > 1) {
                 ticketsCount--
                 updateTicketsCount()
             }
@@ -93,7 +94,33 @@ class MovieDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateTicketsCount(){
+    private fun updateTicketsCount() {
         binding.tvTicket.text = ticketsCount.toString()
+    }
+
+    companion object {
+        private const val EXTRA_TITLE = "title"
+        private const val EXTRA_RELEASE_TIME = "release_time"
+        private const val EXTRA_RUNTIME = "runtime"
+        private const val EXTRA_POSTER = "poster"
+        private const val EXTRA_SERIES_NUMBER = "seriesNumber"
+
+        fun createIntent(
+            context: Context,
+            movieTitle: String,
+            releaseTime: String,
+            runtime: String,
+            poster: Int,
+            seriesNumber: Int
+        ):
+                Intent {
+            return Intent(context, MovieDetailActivity::class.java).apply {
+                putExtra(EXTRA_TITLE, movieTitle)
+                putExtra(EXTRA_RELEASE_TIME, releaseTime)
+                putExtra(EXTRA_RUNTIME, runtime)
+                putExtra(EXTRA_POSTER, poster)
+                putExtra(EXTRA_SERIES_NUMBER, seriesNumber)
+            }
+        }
     }
 }

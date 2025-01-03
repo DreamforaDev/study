@@ -44,9 +44,8 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun navigationToCompletedPage(theaterName : String){
-        val intent = Intent(requireContext(),ReservationCompletedActivity::class.java).apply {
-            putExtra("theater_name",theaterName)
-        }
+
+        val intent = ReservationCompletedActivity.createIntent(requireContext(),theaterName)
         startActivity(intent)
         dismiss()
     }
