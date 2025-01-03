@@ -4,7 +4,7 @@
     <string name="ad_image">AdImg</string>
     <string name="btn_reservation">지금 예매</string>
 
-    <string name="title_date">제목</string>
+    <string name="title_date">영화 제목</string>
     <string name="release_time_date">상영일</string>
     <string name="runtime_date">러닝타임</string>
     <string name="movieDetail_date">영화 줄거리</string>
@@ -17,6 +17,15 @@
     <string name="theater_1">주엽 극장</string>
     <string name="theater_2">정발산 극장</string>
     <string name="theater_3">백석 극장</string>
+
+    <string name="reservation_notes">영화 상영 시작 시간 15분 전까지 \n 취소가 가능합니다.</string>
+    <string name="reservation_dateTime">YYYY.MM.DD HH:MM</string>
+    <string name="reservation_moviegoer_label">일반 </string>
+    <string name="reservation_moviegoer_date">0명</string>
+    <string name="reservation_seat_number">A1, A2</string>
+    <string name="theater_name">OO 극장</string>
+    <string name="tickets_price">10,000원</string>
+    <string name="payment_method">(현장 결제)</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -9,7 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movie.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MovieAdapterListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var recyclerViewAdapter: RecyclerViewAdapter
@@ -81,31 +81,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        recyclerViewAdapter = RecyclerViewAdapter(
-
-            onMovieClickListener = { movieItem ->
-
-                val intent = MovieDetailActivity.createIntent(
-                    this,
-                    movieItem.title,
-                    movieItem.releaseTime,
-                    movieItem.runtime,
-                    movieItem.poster,
-                    movieItem.series
-                )
-
-                startActivity(intent)
-            },
-
-            onButtonClickListener = {
-                val bottomSheetFragment = BottomSheetFragment()
-                bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
-            },
-
-            onAdClickListener = {
-
-            }
-        )
+        recyclerViewAdapter = RecyclerViewAdapter(this)
 
         recyclerViewAdapter.submitList(movieList)
 
@@ -116,5 +92,27 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+    override fun onMovieClick(movie: ListItem.MovieItem) {
+        val intent = MovieDetailActivity.createIntent(
+            this,
+            movie.title,
+            movie.releaseTime,
+            movie.runtime,
+            movie.poster,
+            movie.series
+        )
+        startActivity(intent)
+    }
+
+    override fun onButtonClick(movie: ListItem.MovieItem) {
+
+        val bottomSheetFragment = BottomSheetFragment.newInstance(movie.title)
+        bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+    }
+
+    override fun onAdClick(ad: ListItem.AdItem) {
+        TODO("Not yet implemented")
     }
 }

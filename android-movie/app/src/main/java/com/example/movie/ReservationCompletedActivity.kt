@@ -24,21 +24,35 @@ class ReservationCompletedActivity : AppCompatActivity() {
             finish()
         }
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        val movieTitle = intent.getStringExtra(EXTRA_MOVIE_TITLE)
+        val theaterName = intent.getStringExtra(EXTRA_THEATER_NAME)
+
+        binding.tvTitle.text = movieTitle
+        binding.tvTheater.text = theaterName
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.reservation_completed_root)) { reservationCompletedView, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            reservationCompletedView.setPadding(
+                systemBars.left,
+                systemBars.top,
+                systemBars.right,
+                systemBars.bottom
+            )
             insets
         }
     }
 
-    companion object{
+    companion object {
+        private const val EXTRA_MOVIE_TITLE = "movie_title"
         private const val EXTRA_THEATER_NAME = "theater_name"
 
-        fun createIntent(context: Context,theaterName:String) :
-                Intent{
-            return Intent(context,ReservationCompletedActivity::class.java).apply {
-                putExtra(EXTRA_THEATER_NAME,theaterName)
+        fun createIntent(context: Context, movieTitle: String, theaterName: String):
+                Intent {
+            return Intent(context, ReservationCompletedActivity::class.java).apply {
+                putExtra(EXTRA_MOVIE_TITLE, movieTitle)
+                putExtra(EXTRA_THEATER_NAME, theaterName)
             }
         }
+
     }
 }

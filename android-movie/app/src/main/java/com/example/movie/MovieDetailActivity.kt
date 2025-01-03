@@ -13,7 +13,6 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMovieDetailBinding
 
-
     private var ticketsCount: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,9 +48,11 @@ class MovieDetailActivity : AppCompatActivity() {
         }
 
         binding.cvMinusBtn.setOnClickListener {
-            if (ticketsCount > 1) {
-                ticketsCount--
-                updateTicketsCount()
+            when {
+                ticketsCount > 1 -> {
+                    ticketsCount--
+                    updateTicketsCount()
+                }
             }
         }
 

@@ -10,9 +10,7 @@ import com.example.movie.databinding.ItemAdBinding
 import com.example.movie.databinding.ItemMovieBinding
 
 class RecyclerViewAdapter(
-    private val onMovieClickListener: (ListItem.MovieItem) -> Unit,
-    private val onButtonClickListener: (ListItem.MovieItem) -> Unit,
-    private val onAdClickListener: (ListItem.AdItem) -> Unit
+    private val listener: MovieAdapterListener
 ) : ListAdapter<ListItem, RecyclerView.ViewHolder>(diffUtil) {
 
     inner class MovieItemHolder(val binding: ItemMovieBinding) :
@@ -25,11 +23,11 @@ class RecyclerViewAdapter(
             binding.tvRuntime.text = item.runtime
 
             binding.root.setOnClickListener {
-                onMovieClickListener(item)
+                listener.onMovieClick(item)
             }
 
             binding.cvReservationBtn.setOnClickListener {
-                onButtonClickListener(item)
+                listener.onButtonClick(item)
             }
 
         }
@@ -42,7 +40,7 @@ class RecyclerViewAdapter(
             binding.imgAd.setImageResource(item.adImg)
 
             binding.root.setOnClickListener {
-                onAdClickListener
+                listener.onAdClick(item)
             }
 
         }
@@ -96,5 +94,3 @@ class RecyclerViewAdapter(
         }
     }
 }
-
-
