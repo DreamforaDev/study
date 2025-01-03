@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/reservation_completed_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReservationCompletedActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/back_toolbar" />
+
+    <TextView
+        android:id="@+id/tv_reservation_note"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/lichen"
+        android:gravity="center|bottom"
+        android:padding="15dp"
+        android:text="@string/reservation_notes"
+        android:textColor="@color/forestgreen"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="@string/title_date"
+        android:textColor="@color/forestgreen"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_reservation_note" />
+
+    <TextView
+        android:id="@+id/tv_reservation_dateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/reservation_dateTime"
+        android:textColor="@color/forestgreen"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+
+    <LinearLayout
+        android:id="@+id/reservation_info_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="25dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reservation_dateTime">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:text="@string/reservation_moviegoer_label"
+            android:textColor="@color/forestgreen"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_moviegoer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reservation_moviegoer_date"
+            android:textColor="@color/forestgreen"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="1.5dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="@color/forestgreen" />
+
+        <TextView
+            android:id="@+id/tv_reservation_seat_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reservation_seat_number"
+            android:textColor="@color/forestgreen"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="1.5dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="@color/forestgreen" />
+
+        <TextView
+            android:id="@+id/tv_theater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/theater_name"
+            android:textColor="@color/forestgreen"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/payment_info_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reservation_info_container">
+
+        <TextView
+            android:id="@+id/tv_tickets_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tickets_price"
+            android:textColor="@color/forestgreen"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
+            android:text="@string/payment_method"
+            android:textColor="@color/forestgreen"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
