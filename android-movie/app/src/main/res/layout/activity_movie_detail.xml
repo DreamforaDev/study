@@ -8,14 +8,16 @@
     android:orientation="vertical"
     tools:context=".MovieDetailActivity">
 
-    <include layout="@layout/back_toolbar" android:id="@+id/toolbar" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/back_toolbar" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -36,36 +38,64 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="18dp"
-                android:text="@string/title"
+                android:text="@string/title_date"
                 android:textColor="@color/forestgreen"
                 android:textSize="26sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_poster" />
 
+            <!-- 상영일 레이블 -->
             <TextView
-                android:id="@+id/tv_release_time"
+                android:id="@+id/tv_release_time_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginTop="10dp"
-                android:text="@string/release_time"
+                android:layout_marginEnd="0dp"
+                android:text="@string/release_time_label"
                 android:textColor="@color/forestgreen"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
             <TextView
-                android:id="@+id/tv_runtime"
+                android:id="@+id/tv_release_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/release_time_date"
+                android:textColor="@color/forestgreen"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/tv_release_time_label"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+
+            <!-- 러닝타임 레이블 -->
+            <TextView
+                android:id="@+id/tv_runtime_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:text="@string/runtime"
+                android:layout_marginEnd="0dp"
+                android:text="@string/runtime_label"
                 android:textColor="@color/forestgreen"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_release_time" />
+
+            <TextView
+                android:id="@+id/tv_runtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/runtime_date"
+                android:textColor="@color/forestgreen"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/tv_runtime_label"
                 app:layout_constraintTop_toBottomOf="@+id/tv_release_time" />
 
             <TextView
@@ -73,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:text="@string/movieDetail"
+                android:text="@string/movieDetail_date"
                 android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@+id/tv_runtime" />
 
@@ -92,10 +122,10 @@
             android:id="@+id/cv_minus_btn"
             android:layout_width="70dp"
             android:layout_height="50dp"
-            app:strokeWidth="0dp"
             android:background="@color/lichen"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeWidth="0dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -112,20 +142,19 @@
             android:textColor="@color/lichen"
             android:textSize="30sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/cv_reservation_btn"
             app:layout_constraintLeft_toRightOf="@+id/cv_minus_btn"
             app:layout_constraintRight_toLeftOf="@+id/cv_add_btn"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/cv_reservation_btn"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_add_btn"
             android:layout_width="70dp"
             android:layout_height="50dp"
-            app:strokeWidth="0dp"
             android:background="@color/lichen"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeWidth="0dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -139,21 +168,20 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
-            app:strokeWidth="0dp"
             android:background="@color/lichen"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_ticket">
+            app:layout_constraintTop_toBottomOf="@+id/tv_ticket"
+            app:strokeWidth="0dp">
 
             <TextView
                 android:id="@+id/tv_reservation_complete_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="@string/reservation_complete"
                 android:textColor="@color/forestgreen"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                />
+                android:textStyle="bold" />
         </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
