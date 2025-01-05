@@ -7,7 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.movie.databinding.ActivityMovieDetailBinding
 import com.example.movie.databinding.ActivityReservationCompletedBinding
 
 class ReservationCompletedActivity : AppCompatActivity() {
@@ -29,7 +28,7 @@ class ReservationCompletedActivity : AppCompatActivity() {
 
         binding.tvTitle.text = movieTitle
         binding.tvTheater.text = theaterName
-
+        
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.reservation_completed_root)) { reservationCompletedView, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             reservationCompletedView.setPadding(

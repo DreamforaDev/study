@@ -19,7 +19,7 @@
     <string name="theater_3">백석 극장</string>
 
     <string name="reservation_notes">영화 상영 시작 시간 15분 전까지 \n 취소가 가능합니다.</string>
-    <string name="reservation_dateTime">YYYY.MM.DD HH:MM</string>
+    <string name="reservation_dateTime">%1$s %2$s</string>
     <string name="reservation_moviegoer_label">일반 </string>
     <string name="reservation_moviegoer_date">0명</string>
     <string name="reservation_seat_number">A1, A2</string>
@@ -28,4 +28,6 @@
     <string name="payment_method">(현장 결제)</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>

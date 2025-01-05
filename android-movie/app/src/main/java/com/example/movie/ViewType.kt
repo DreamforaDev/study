@@ -6,8 +6,8 @@ enum class ViewType(val type: Int) {
 
     companion object{
         fun fromInt(type : Int):ViewType {
-            return values().find { it.type == type }
-                ?: throw IllegalArgumentException("Invalid view type(${type}")
+            return entries.find { it.type == type }
+                ?: throw IllegalArgumentException("Invalid view type(${type})")
         }
     }
 }
