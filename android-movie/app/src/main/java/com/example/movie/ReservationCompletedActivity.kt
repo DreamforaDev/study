@@ -8,6 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.movie.databinding.ActivityReservationCompletedBinding
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class ReservationCompletedActivity : AppCompatActivity() {
 
@@ -28,7 +32,17 @@ class ReservationCompletedActivity : AppCompatActivity() {
 
         binding.tvTitle.text = movieTitle
         binding.tvTheater.text = theaterName
-        
+
+        val localDate : LocalDate = LocalDate.now()
+        val localTime : LocalTime = LocalTime.now()
+
+        val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
+        val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
+        val formattedDate = localDate.format(dateFormatter)
+        val formattedTime = localTime.format(timeFormatter)
+
+        binding.tvReservationDateTime.text = getString(R.string.reservation_dateTime, formattedDate, formattedTime)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.reservation_completed_root)) { reservationCompletedView, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             reservationCompletedView.setPadding(
