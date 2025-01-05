@@ -60,6 +60,11 @@ class MovieDetailActivity : AppCompatActivity() {
             updateTicketsCount()
         }
 
+        binding.tvReservationCompleteBtn.setOnClickListener {
+            val bottomSheetFragment = BottomSheetFragment.newInstanceToDetail(title,ticketsCount)
+            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
