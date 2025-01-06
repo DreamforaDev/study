@@ -1,13 +1,16 @@
 package com.example.movie
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movie.databinding.ActivityMainBinding
+import java.net.URI
 
 class MainActivity : AppCompatActivity(), MovieAdapterListener {
 
@@ -113,6 +116,17 @@ class MainActivity : AppCompatActivity(), MovieAdapterListener {
     }
 
     override fun onAdClick(ad: ListItem.AdItem) {
-        TODO("Not yet implemented")
+        val uri = Uri.parse(ad.adUrl)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+
+        if (intent.resolveActivity(packageManager) == null) {
+            return Toast.makeText(
+                this,
+                "No browser available to open this link",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            startActivity(intent)
+        }
     }
 }
