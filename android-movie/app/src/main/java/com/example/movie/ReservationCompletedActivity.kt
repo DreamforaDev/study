@@ -8,9 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.movie.databinding.ActivityReservationCompletedBinding
-import java.time.LocalDate
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class ReservationCompletedActivity : AppCompatActivity() {
@@ -38,16 +35,11 @@ class ReservationCompletedActivity : AppCompatActivity() {
         binding.tvMoviegoer.text = getString(R.string.ticket_count_format, ticketNumber)
         binding.tvTicketsPrice.text = getString(R.string.ticket_price_format, ticketPrice)
 
-        val nowDate: LocalDate = LocalDate.now()
-        val nowTime: LocalTime = LocalTime.now()
-
-        val dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT, Locale.getDefault())
-        val timeFormatter = DateTimeFormatter.ofPattern(TIME_FORMAT, Locale.getDefault())
-        val formattedDate = nowDate.format(dateFormatter)
-        val formattedTime = nowTime.format(timeFormatter)
+        val formattedDate = getCurrentFormattedDate()
+        val formattedTime = getCurrentFormattedTime()
 
         binding.tvReservationDateTime.text =
-            getString(R.string.reservation_dateTime, formattedDate, formattedTime)
+            getString(R.string.reservation_dateTime, formattedDate,formattedTime)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.reservation_completed_root)) { reservationCompletedView, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -59,6 +51,20 @@ class ReservationCompletedActivity : AppCompatActivity() {
             )
             insets
         }
+    }
+
+    private fun getCurrentFormattedDate() : String{
+
+        val calendar = java.util.Calendar.getInstance()
+        val dateFormatter = java.text.SimpleDateFormat(DATE_FORMAT,Locale.getDefault())
+        return dateFormatter.format(calendar.time)
+    }
+
+    private fun getCurrentFormattedTime() : String {
+        val calendar = java.util.Calendar.getInstance()
+        val timeFormatter = java.text.SimpleDateFormat(TIME_FORMAT,Locale.getDefault())
+        return timeFormatter.format(calendar.time)
+
     }
 
     companion object {
