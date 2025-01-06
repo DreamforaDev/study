@@ -49,7 +49,7 @@ class MovieDetailActivity : AppCompatActivity() {
 
         binding.cvMinusBtn.setOnClickListener {
 
-            if (ticketsCount > 1) return@setOnClickListener
+            if (ticketsCount < 2) return@setOnClickListener
             ticketsCount--
             updateTicketsCount()
 
