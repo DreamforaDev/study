@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="18dp"
                 android:text="@string/title_date"
-                android:textColor="@color/forestgreen"
+                android:textColor="@color/forest_green"
                 android:textSize="26sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="0dp"
                 android:text="@string/release_time_label"
-                android:textColor="@color/forestgreen"
+                android:textColor="@color/forest_green"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title" />
@@ -67,7 +67,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:text="@string/release_time_date"
-                android:textColor="@color/forestgreen"
+                android:textColor="@color/forest_green"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/tv_release_time_label"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title" />
@@ -81,7 +81,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="0dp"
                 android:text="@string/runtime_label"
-                android:textColor="@color/forestgreen"
+                android:textColor="@color/forest_green"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_release_time" />
@@ -93,7 +93,7 @@
                 android:layout_marginStart="7dp"
                 android:layout_marginEnd="20dp"
                 android:text="@string/runtime_date"
-                android:textColor="@color/forestgreen"
+                android:textColor="@color/forest_green"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/tv_runtime_label"
                 app:layout_constraintTop_toBottomOf="@+id/tv_release_time" />
@@ -114,7 +114,7 @@
         android:id="@+id/bottom_navbar"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:background="@color/forestgreen"
+        android:background="@color/forest_green"
         android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -179,7 +179,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/reservation_complete"
-                android:textColor="@color/forestgreen"
+                android:textColor="@color/forest_green"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </com.google.android.material.card.MaterialCardView>

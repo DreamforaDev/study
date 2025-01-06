@@ -2,7 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="forestgreen">#2b3e34</color>
+    <color name="forest_green">#2b3e34</color>
     <color name="lichen">#CFD1B8</color>
+    <color name="light_lichen">#DFE0CB</color>
     <color name="grey">#a0a0a0</color>
+    <color name="light_grey">#E7E7E7</color>
 </resources>

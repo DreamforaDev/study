@@ -9,6 +9,6 @@
         android:layout_height="match_parent"
         android:contentDescription="@string/ad_image"
         android:scaleType="centerCrop"
-        android:src="@color/forestgreen" />
+        android:src="@color/forest_green" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
