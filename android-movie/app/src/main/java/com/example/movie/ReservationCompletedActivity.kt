@@ -38,13 +38,13 @@ class ReservationCompletedActivity : AppCompatActivity() {
         binding.tvMoviegoer.text = getString(R.string.ticket_count_format, ticketNumber)
         binding.tvTicketsPrice.text = getString(R.string.ticket_price_format, ticketPrice)
 
-        val localDate: LocalDate = LocalDate.now()
-        val localTime: LocalTime = LocalTime.now()
+        val nowDate: LocalDate = LocalDate.now()
+        val nowTime: LocalTime = LocalTime.now()
 
-        val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
-        val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
-        val formattedDate = localDate.format(dateFormatter)
-        val formattedTime = localTime.format(timeFormatter)
+        val dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT, Locale.getDefault())
+        val timeFormatter = DateTimeFormatter.ofPattern(TIME_FORMAT, Locale.getDefault())
+        val formattedDate = nowDate.format(dateFormatter)
+        val formattedTime = nowTime.format(timeFormatter)
 
         binding.tvReservationDateTime.text =
             getString(R.string.reservation_dateTime, formattedDate, formattedTime)
@@ -65,6 +65,8 @@ class ReservationCompletedActivity : AppCompatActivity() {
         private const val EXTRA_MOVIE_TITLE = "movie_title"
         private const val EXTRA_THEATER_NAME = "theater_name"
         private const val EXTRA_TICKET_NUMBER = "ticket_number"
+        private const val DATE_FORMAT = "yyyy-MM-dd"
+        private const val TIME_FORMAT = "HH:mm"
 
         fun createIntent(
             context: Context,
