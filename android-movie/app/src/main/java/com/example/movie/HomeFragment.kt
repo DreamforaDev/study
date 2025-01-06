@@ -140,16 +140,9 @@ class HomeFragment : Fragment(),MovieAdapterListener {
         }
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-
-
-    companion object {
-
     }
 
 }
