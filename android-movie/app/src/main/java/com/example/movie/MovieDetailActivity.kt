@@ -48,21 +48,17 @@ class MovieDetailActivity : AppCompatActivity() {
         }
 
         binding.cvMinusBtn.setOnClickListener {
-
-            if (ticketsCount > 1) return@setOnClickListener
-            ticketsCount--
-            updateTicketsCount()
-
+            when {
+                ticketsCount > 1 -> {
+                    ticketsCount--
+                    updateTicketsCount()
+                }
+            }
         }
 
         binding.cvAddBtn.setOnClickListener {
             ticketsCount++
             updateTicketsCount()
-        }
-
-        binding.tvReservationCompleteBtn.setOnClickListener {
-            val bottomSheetFragment = BottomSheetFragment.newInstanceToDetail(title,ticketsCount)
-            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

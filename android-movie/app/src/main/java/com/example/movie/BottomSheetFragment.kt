@@ -15,25 +15,14 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentBottomSheetBinding
 
     private lateinit var movieTitle: String
-    private var ticketNumber : Int? = null
 
     companion object {
         private const val ARG_MOVIE_TITLE = "movie_title"
-        private const val ARG_TICKET_NUMBER = "ticket_number"
 
         fun newInstance(movieTitle: String): BottomSheetFragment {
             val fragment = BottomSheetFragment()
             val args = Bundle()
             args.putString(ARG_MOVIE_TITLE, movieTitle)
-            fragment.arguments = args
-            return fragment
-        }
-
-        fun newInstanceToDetail(movieTitle: String,ticketNumber:Int):BottomSheetFragment{
-            val fragment = BottomSheetFragment()
-            val args = Bundle()
-            args.putString(ARG_MOVIE_TITLE,movieTitle)
-            args.putInt(ARG_TICKET_NUMBER,ticketNumber)
             fragment.arguments = args
             return fragment
         }
@@ -43,9 +32,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             movieTitle = it.getString(ARG_MOVIE_TITLE, "Unknown movie title.")
-            if (it.containsKey(ARG_TICKET_NUMBER)) {
-                ticketNumber = it.getInt(ARG_TICKET_NUMBER)
-            }
         }
     }
 
@@ -79,8 +65,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     private fun navigationToCompletedPage(theaterName: String) {
         val intent =
-            ReservationCompletedActivity.createIntent(requireContext(), movieTitle, theaterName, ticketNumber)
-
+            ReservationCompletedActivity.createIntent(requireContext(), movieTitle, theaterName)
         startActivity(intent)
         dismiss()
     }
