@@ -2,14 +2,13 @@ package com.example.movie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie.databinding.ItemAdBinding
 import com.example.movie.databinding.ItemMovieBinding
 
-class RecyclerViewAdapter(
+class MovieListAdapter(
     private val listener: MovieAdapterListener
 ) : ListAdapter<ListItem, RecyclerView.ViewHolder>(diffUtil) {
 
