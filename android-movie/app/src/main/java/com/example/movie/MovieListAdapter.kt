@@ -2,14 +2,13 @@ package com.example.movie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie.databinding.ItemAdBinding
 import com.example.movie.databinding.ItemMovieBinding
 
-class RecyclerViewAdapter(
+class MovieListAdapter(
     private val listener: MovieAdapterListener
 ) : ListAdapter<ListItem, RecyclerView.ViewHolder>(diffUtil) {
 
@@ -29,9 +28,7 @@ class RecyclerViewAdapter(
             binding.cvReservationBtn.setOnClickListener {
                 listener.onButtonClick(item)
             }
-
         }
-
     }
 
     inner class AdItemHolder(val binding: ItemAdBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -42,9 +39,7 @@ class RecyclerViewAdapter(
             binding.root.setOnClickListener {
                 listener.onAdClick(item)
             }
-
         }
-
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -70,7 +65,6 @@ class RecyclerViewAdapter(
 
             }
         }
-
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
