@@ -11,7 +11,7 @@ import android.widget.Toast
 import com.example.movie.databinding.FragmentHomeBinding
 
 
-class HomeFragment : Fragment(),MovieAdapterListener {
+class MovieListFragment : Fragment(),MovieAdapterListener {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var movieListAdapter: MovieListAdapter

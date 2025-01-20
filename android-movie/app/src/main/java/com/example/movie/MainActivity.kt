@@ -1,16 +1,8 @@
 package com.example.movie
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movie.databinding.ActivityMainBinding
-import java.net.URI
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.main_container, HomeFragment())
+                    supportFragmentManager.beginTransaction().replace(R.id.main_container, MovieListFragment())
                         .commit()
                     true
                 }
