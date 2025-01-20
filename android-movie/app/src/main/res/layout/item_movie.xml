@@ -93,7 +93,7 @@
         android:id="@+id/cv_reservation_btn"
         android:layout_width="88dp"
         android:layout_height="36dp"
-        android:backgroundTint="@color/forestgreen"
+        android:backgroundTint="@color/forest_green"
         android:clickable="true"
         android:focusable="true"
         app:cardCornerRadius="5dp"

@@ -10,13 +10,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp">
+        android:layout_height="70dp">
 
         <LinearLayout
             android:id="@+id/details_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="7dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -25,14 +26,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/reservation_date"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 android:textColor="@color/dark_grey"/>
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
                 android:background="@color/light_grey" />
 
             <TextView
@@ -40,14 +41,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/reservation_time"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 android:textColor="@color/dark_grey"/>
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
                 android:background="@color/light_grey" />
 
             <TextView
@@ -55,15 +56,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/theater_name"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 android:textColor="@color/dark_grey"
                 />
         </LinearLayout>
+
         <TextView
             android:id="@+id/tv_movie_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="7dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/title_data"
             android:textSize="16sp"
             android:textStyle="bold"
