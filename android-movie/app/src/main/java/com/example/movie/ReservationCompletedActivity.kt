@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -97,9 +98,10 @@ class ReservationCompletedActivity : AppCompatActivity() {
         existingDataList.put(newReservation)
 
         Log.d("ReservationCompleted", "Updated Data List: $existingDataList")
+        Toast.makeText(this,"예매 성공!",Toast.LENGTH_SHORT).show()
+
         edit.putString(PreferenceKeys.MOVIES_LIST.key, existingDataList.toString())
         edit.apply()
-
     }
 
     companion object {
