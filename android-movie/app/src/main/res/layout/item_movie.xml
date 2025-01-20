@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
-        android:text="@string/title_date"
+        android:text="@string/title_data"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/iv_poster"
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="7dp"
             android:paddingEnd="15dp"
-            android:text="@string/release_time_date"
+            android:text="@string/release_time_data"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="7dp"
             android:paddingEnd="15dp"
-            android:text="@string/runtime_date"
+            android:text="@string/runtime_data"
             android:textSize="12sp" />
     </LinearLayout>
 

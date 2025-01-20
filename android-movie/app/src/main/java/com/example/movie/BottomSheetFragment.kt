@@ -7,15 +7,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.movie.ReservationCompletedActivity.Companion
 import com.example.movie.databinding.FragmentBottomSheetBinding
+import com.example.movie.model.ReservedMovie
+import com.example.movie.viewModel.ReservationDetailsViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import java.util.Locale
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentBottomSheetBinding
 
     private lateinit var movieTitle: String
-    private var ticketNumber : Int? = null
+    private var ticketNumber: Int? = null
 
     companion object {
         private const val ARG_MOVIE_TITLE = "movie_title"
@@ -29,11 +33,11 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             return fragment
         }
 
-        fun newInstanceToDetail(movieTitle: String,ticketNumber:Int):BottomSheetFragment{
+        fun newInstanceToDetail(movieTitle: String, ticketNumber: Int): BottomSheetFragment {
             val fragment = BottomSheetFragment()
             val args = Bundle()
-            args.putString(ARG_MOVIE_TITLE,movieTitle)
-            args.putInt(ARG_TICKET_NUMBER,ticketNumber)
+            args.putString(ARG_MOVIE_TITLE, movieTitle)
+            args.putInt(ARG_TICKET_NUMBER, ticketNumber)
             fragment.arguments = args
             return fragment
         }
@@ -47,6 +51,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 ticketNumber = it.getInt(ARG_TICKET_NUMBER)
             }
         }
+
     }
 
     override fun onCreateView(
@@ -78,9 +83,14 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun navigationToCompletedPage(theaterName: String) {
-        val intent =
-            ReservationCompletedActivity.createIntent(requireContext(), movieTitle, theaterName, ticketNumber)
 
+        val intent =
+            ReservationCompletedActivity.createIntent(
+                requireContext(),
+                movieTitle,
+                theaterName,
+                ticketNumber
+            )
         startActivity(intent)
         dismiss()
     }

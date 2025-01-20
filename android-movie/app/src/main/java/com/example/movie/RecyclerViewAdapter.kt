@@ -29,9 +29,7 @@ class RecyclerViewAdapter(
             binding.cvReservationBtn.setOnClickListener {
                 listener.onButtonClick(item)
             }
-
         }
-
     }
 
     inner class AdItemHolder(val binding: ItemAdBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -42,9 +40,7 @@ class RecyclerViewAdapter(
             binding.root.setOnClickListener {
                 listener.onAdClick(item)
             }
-
         }
-
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -70,7 +66,6 @@ class RecyclerViewAdapter(
 
             }
         }
-
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

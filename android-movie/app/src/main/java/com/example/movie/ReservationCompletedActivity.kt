@@ -3,14 +3,14 @@ package com.example.movie
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.movie.databinding.ActivityReservationCompletedBinding
-import java.time.LocalDate
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
+import org.json.JSONArray
+import org.json.JSONObject
 import java.util.Locale
 
 class ReservationCompletedActivity : AppCompatActivity() {
@@ -38,16 +38,13 @@ class ReservationCompletedActivity : AppCompatActivity() {
         binding.tvMoviegoer.text = getString(R.string.ticket_count_format, ticketNumber)
         binding.tvTicketsPrice.text = getString(R.string.ticket_price_format, ticketPrice)
 
-        val localDate: LocalDate = LocalDate.now()
-        val localTime: LocalTime = LocalTime.now()
-
-        val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
-        val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
-        val formattedDate = localDate.format(dateFormatter)
-        val formattedTime = localTime.format(timeFormatter)
+        val formattedDate = getCurrentFormattedDate()
+        val formattedTime = getCurrentFormattedTime()
 
         binding.tvReservationDateTime.text =
             getString(R.string.reservation_dateTime, formattedDate, formattedTime)
+
+        saveData()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.reservation_completed_root)) { reservationCompletedView, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -59,18 +56,64 @@ class ReservationCompletedActivity : AppCompatActivity() {
             )
             insets
         }
+
+    }
+
+    private fun getCurrentFormattedDate(): String {
+
+        val calendar = java.util.Calendar.getInstance()
+        val dateFormatter = java.text.SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
+        return dateFormatter.format(calendar.time)
+    }
+
+    private fun getCurrentFormattedTime(): String {
+        val calendar = java.util.Calendar.getInstance()
+        val timeFormatter = java.text.SimpleDateFormat(TIME_FORMAT, Locale.getDefault())
+        return timeFormatter.format(calendar.time)
+
+    }
+
+    private fun saveData() {
+        val sharedPreferences =
+            getSharedPreferences(PreferenceKeys.SHARED_PREFERENCE_NAME.key, Context.MODE_PRIVATE)
+        val edit = sharedPreferences.edit()
+
+        val existingDataJson = sharedPreferences.getString(PreferenceKeys.MOVIES_LIST.key, "[]")
+        val existingDataList = JSONArray(existingDataJson)
+
+        val newReservation = JSONObject().apply {
+            put(PreferenceKeys.DATE.key, getCurrentFormattedDate())
+            put(PreferenceKeys.TIME.key, getCurrentFormattedTime())
+            put(
+                PreferenceKeys.THEATER_NAME.key,
+                intent.getStringExtra(EXTRA_THEATER_NAME) ?: "Unknown theater"
+            )
+            put(
+                PreferenceKeys.MOVIE_TITLE.key,
+                intent.getStringExtra(EXTRA_MOVIE_TITLE) ?: "Unknown title"
+            )
+        }
+
+        existingDataList.put(newReservation)
+
+        Log.d("ReservationCompleted", "Updated Data List: $existingDataList")
+        edit.putString(PreferenceKeys.MOVIES_LIST.key, existingDataList.toString())
+        edit.apply()
+
     }
 
     companion object {
         private const val EXTRA_MOVIE_TITLE = "movie_title"
         private const val EXTRA_THEATER_NAME = "theater_name"
         private const val EXTRA_TICKET_NUMBER = "ticket_number"
+        private const val DATE_FORMAT = "yyyy-MM-dd"
+        private const val TIME_FORMAT = "HH:mm"
 
         fun createIntent(
             context: Context,
             movieTitle: String,
             theaterName: String,
-            ticketNumber: Int? = null
+            ticketNumber: Int? = null,
         ):
                 Intent {
             return Intent(context, ReservationCompletedActivity::class.java).apply {
