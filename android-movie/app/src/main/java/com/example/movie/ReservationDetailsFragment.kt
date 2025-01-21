@@ -10,10 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movie.databinding.FragmentReservationDetailsBinding
 import com.example.movie.model.ReservedMovie
 
-class ReservationDetailsFragment : Fragment() {
+class ReservationDetailsFragment : Fragment(),ReservationDetailsContract.View {
 
     private lateinit var binding: FragmentReservationDetailsBinding
     private lateinit var adapter: ReservationDetailsAdapter
+    private lateinit var presenter: ReservationDetailsContract.Presenter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +28,9 @@ class ReservationDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
-        loadReservedMoviesFromSharedPreferences()
+
+        presenter = ReservationDetailsPresenter(this,requireContext())
+        presenter.loadReservedMovies()
     }
 
     private fun setupRecyclerView() {
@@ -38,38 +41,15 @@ class ReservationDetailsFragment : Fragment() {
         }
     }
 
-    private fun loadReservedMoviesFromSharedPreferences() {
-        val sharedPreferences = requireContext().getSharedPreferences(
-            PreferenceKeys.SHARED_PREFERENCE_NAME.key,
-            Context.MODE_PRIVATE
-        )
-        val jsonString = sharedPreferences.getString(PreferenceKeys.MOVIES_LIST.key, "[]")
-        val jsonArray = org.json.JSONArray(jsonString)
+    override fun showReservedMovies(movies: List<ReservedMovie>) {
+        adapter.submitList(movies)
+        binding.emptyStateTv.visibility=View.GONE
+        binding.reservationDetailsRecyclerview.visibility=View.VISIBLE
 
-        if (jsonArray.length() == 0) {
-            adapter.submitList(emptyList())
-            return
-        }
+    }
 
-        val reservedMoviesList = mutableListOf<ReservedMovie>()
-        for (i in 0 until jsonArray.length()) {
-            val jsonObject = jsonArray.getJSONObject(i)
-            val reservedMovie = ReservedMovie(
-                movieTitle = if (jsonObject.has(PreferenceKeys.MOVIE_TITLE.key)) jsonObject.getString(
-                    PreferenceKeys.MOVIE_TITLE.key
-                ) else "Unknown Title",
-                theaterName = if (jsonObject.has(PreferenceKeys.THEATER_NAME.key)) jsonObject.getString(
-                    PreferenceKeys.THEATER_NAME.key
-                ) else "Unknown Theater",
-                date = if (jsonObject.has(PreferenceKeys.DATE.key)) jsonObject.getString(
-                    PreferenceKeys.DATE.key
-                ) else "Unknown Date",
-                time = if (jsonObject.has(PreferenceKeys.TIME.key)) jsonObject.getString(
-                    PreferenceKeys.TIME.key
-                ) else "Unknown Time"
-            )
-            reservedMoviesList.add(reservedMovie)
-        }
-        adapter.submitList(reservedMoviesList)
+    override fun showEmptyState() {
+        binding.emptyStateTv.visibility=View.VISIBLE
+        binding.reservationDetailsRecyclerview.visibility=View.GONE
     }
 }

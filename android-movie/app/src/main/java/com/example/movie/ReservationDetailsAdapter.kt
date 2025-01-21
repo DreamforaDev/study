@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie.databinding.ItemReservedMovieBinding
 import com.example.movie.model.ReservedMovie
-import com.example.movie.viewModel.ReservationDetailsViewModel
 
 class ReservationDetailsAdapter
     : ListAdapter<ReservedMovie, ReservationDetailsAdapter.MovieViewHolder>(diffUtil) {
