@@ -1,18 +1,12 @@
 package com.example.movie
 
-import android.content.Context
-import android.content.Intent
+
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.movie.ReservationCompletedActivity.Companion
 import com.example.movie.databinding.FragmentBottomSheetBinding
-import com.example.movie.model.ReservedMovie
-import com.example.movie.viewModel.ReservationDetailsViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import java.util.Locale
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
 

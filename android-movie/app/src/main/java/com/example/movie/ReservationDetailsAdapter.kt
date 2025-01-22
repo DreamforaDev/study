@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie.databinding.ItemReservedMovieBinding
 import com.example.movie.model.ReservedMovie
-import com.example.movie.viewModel.ReservationDetailsViewModel
 
 class ReservationDetailsAdapter
     : ListAdapter<ReservedMovie, ReservationDetailsAdapter.MovieViewHolder>(diffUtil) {
@@ -18,8 +17,7 @@ class ReservationDetailsAdapter
         fun bind(movie: ReservedMovie) {
             binding.tvMovieTitle.text = movie.movieTitle
             binding.tvTheaterName.text = movie.theaterName
-            binding.tvReservationDate.text = movie.date
-            binding.tvReservationTime.text = movie.time
+            binding.tvReservationDateTime.text = movie.dateTime
 
         }
     }

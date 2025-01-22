@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie.databinding.ItemAdBinding
 import com.example.movie.databinding.ItemMovieBinding
+import com.example.movie.model.ListItem
 
 class MovieListAdapter(
-    private val listener: MovieAdapterListener
+    private val listener: MovieListAdapterListener
 ) : ListAdapter<ListItem, RecyclerView.ViewHolder>(diffUtil) {
 
     inner class MovieItemHolder(val binding: ItemMovieBinding) :
@@ -44,22 +45,22 @@ class MovieListAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
-            is ListItem.MovieItem -> ViewType.MOVIE_ITEM.type
-            is ListItem.AdItem -> ViewType.AD_ITEM.type
+            is ListItem.MovieItem -> MovieListItemViewType.MOVIE_ITEM.type
+            is ListItem.AdItem -> MovieListItemViewType.AD_ITEM.type
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        val viewTypeEnum = ViewType.fromInt(viewType)
+        val viewTypeEnum = MovieListItemViewType.fromInt(viewType)
         return when (viewTypeEnum) {
-            ViewType.MOVIE_ITEM -> {
+            MovieListItemViewType.MOVIE_ITEM -> {
                 val view =
                     ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 MovieItemHolder(view)
             }
 
-            ViewType.AD_ITEM -> {
+            MovieListItemViewType.AD_ITEM -> {
                 val view = ItemAdBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 AdItemHolder(view)
 

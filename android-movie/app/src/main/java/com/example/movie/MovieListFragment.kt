@@ -9,9 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.movie.databinding.FragmentHomeBinding
+import com.example.movie.model.ListItem
 
 
-class MovieListFragment : Fragment(),MovieAdapterListener {
+class MovieListFragment : Fragment(),MovieListAdapterListener {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var movieListAdapter: MovieListAdapter
@@ -24,7 +25,6 @@ class MovieListFragment : Fragment(),MovieAdapterListener {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -33,7 +33,6 @@ class MovieListFragment : Fragment(),MovieAdapterListener {
         movieListAdapter.submitList(movieList)
 
         binding.mainRecyclerview.adapter = movieListAdapter
-
     }
 
     override fun onMovieClick(movie: ListItem.MovieItem) {
