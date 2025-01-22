@@ -5,7 +5,7 @@ import com.example.movie.model.ReservedMovie
 interface ReservationDetailsContract {
 
     interface View{
-        fun showReservedMovies(movies:List<ReservedMovie>)
+        fun displayReservedMovies(movies:List<ReservedMovie>)
         fun showEmptyState()
     }
     interface Presenter{

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie.databinding.ItemAdBinding
 import com.example.movie.databinding.ItemMovieBinding
+import com.example.movie.model.ListItem
 
 class MovieListAdapter(
     private val listener: MovieListAdapterListener

@@ -1,5 +1,7 @@
 package com.example.movie
 
+import com.example.movie.model.ListItem
+
 object MovieList {
 
     val movieList = listOf(

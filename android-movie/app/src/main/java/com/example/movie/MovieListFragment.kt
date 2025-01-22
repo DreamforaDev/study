@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.movie.databinding.FragmentHomeBinding
+import com.example.movie.model.ListItem
 
 
 class MovieListFragment : Fragment(),MovieListAdapterListener {

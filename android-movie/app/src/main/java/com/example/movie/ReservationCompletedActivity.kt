@@ -7,9 +7,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.movie.databinding.ActivityReservationCompletedBinding
 import com.example.movie.model.Reservation
+import java.time.LocalDateTime
 
 
-class ReservationCompletedActivity : AppCompatActivity(),ReservationCompletedContract.View {
+class ReservationCompletedActivity : AppCompatActivity(), ReservationCompletedContract.View {
 
     private lateinit var binding: ActivityReservationCompletedBinding
     private lateinit var presenter: ReservationCompletedContract.Presenter
@@ -19,7 +20,7 @@ class ReservationCompletedActivity : AppCompatActivity(),ReservationCompletedCon
         binding = ActivityReservationCompletedBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        presenter = ReservationCompletedPresenter(this,this)
+        presenter = ReservationCompletedPresenter(this, this)
 
         binding.toolbar.btnBack.setOnClickListener {
             finish()
@@ -28,10 +29,11 @@ class ReservationCompletedActivity : AppCompatActivity(),ReservationCompletedCon
         val movieTitle = intent.getStringExtra(EXTRA_MOVIE_TITLE) ?: "Unknown movieTitle"
         val theaterName = intent.getStringExtra(EXTRA_THEATER_NAME) ?: "Unknown theaterName"
         val ticketNumber = intent.getIntExtra(EXTRA_TICKET_NUMBER, 1)
+        val nowDateTime = LocalDateTime.now()
 
-        presenter.saveReservation(movieTitle,theaterName,ticketNumber)
+        presenter.saveReservation(movieTitle, theaterName, ticketNumber, nowDateTime)
 
-        presenter.getReservationDetails(movieTitle,theaterName,ticketNumber)
+        presenter.showReservationDetails(movieTitle,theaterName,ticketNumber,nowDateTime)
     }
 
     companion object {
@@ -55,18 +57,15 @@ class ReservationCompletedActivity : AppCompatActivity(),ReservationCompletedCon
     }
 
     override fun showToast(message: String) {
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun displayReservationDetails(reservation: Reservation) {
         binding.tvTitle.text = reservation.movieTitle
         binding.tvTheater.text = reservation.theaterName
         binding.tvMoviegoer.text = getString(R.string.ticket_count_format, reservation.ticketNumber)
-        binding.tvTicketsPrice.text = getString(R.string.ticket_price_format, reservation.ticketPrice)
-        binding.tvReservationDateTime.text = getString(
-            R.string.reservation_dateTime,
-            reservation.formattedDate,
-            reservation.formattedTime
-        )
+        binding.tvTicketsPrice.text =
+            getString(R.string.ticket_price_format, reservation.ticketPrice)
+        binding.tvReservationDateTime.text = reservation.dateTime
     }
 }

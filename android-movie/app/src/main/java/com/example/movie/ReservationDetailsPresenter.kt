@@ -4,19 +4,19 @@ import android.content.Context
 import com.example.movie.model.ReservedMovie
 
 class ReservationDetailsPresenter(
-    private val view : ReservationDetailsContract.View,
+    private val view: ReservationDetailsContract.View,
     private val context: Context
-) : ReservationDetailsContract.Presenter{
+) : ReservationDetailsContract.Presenter {
     override fun loadReservedMovies() {
         val sharedPreferences = context.getSharedPreferences(
             PreferenceKeys.SHARED_PREFERENCE_NAME.key,
             Context.MODE_PRIVATE
         )
 
-        val jsonString = sharedPreferences.getString(PreferenceKeys.MOVIES_LIST.key,"[]")
+        val jsonString = sharedPreferences.getString(PreferenceKeys.MOVIES_LIST.key, "[]")
         val jsonArray = org.json.JSONArray(jsonString)
 
-        if(jsonArray.length() == 0){
+        if (jsonArray.length() == 0) {
             view.showEmptyState()
             return
         }
@@ -31,18 +31,17 @@ class ReservationDetailsPresenter(
                 theaterName = if (jsonObject.has(PreferenceKeys.THEATER_NAME.key)) jsonObject.getString(
                     PreferenceKeys.THEATER_NAME.key
                 ) else "Unknown Theater",
-                date = if (jsonObject.has(PreferenceKeys.DATE.key)) jsonObject.getString(
-                    PreferenceKeys.DATE.key
-                ) else "Unknown Date",
-                time = if (jsonObject.has(PreferenceKeys.TIME.key)) jsonObject.getString(
-                    PreferenceKeys.TIME.key
-                ) else "Unknown Time"
-            )
+                dateTime = if (jsonObject.has(PreferenceKeys.DATE_TIME.key)) jsonObject.getString(
+                    PreferenceKeys.DATE_TIME.key
+                ) else "Unknown DateTime",
+
+                )
             reservedMoviesList.add(reservedMovie)
         }
-
-        view.showReservedMovies(reservedMoviesList)
+        showReservedMovies(reservedMoviesList)
     }
 
-
+    private fun showReservedMovies(reservedMoviesList: MutableList<ReservedMovie>) {
+        view.displayReservedMovies(reservedMoviesList)
+    }
 }

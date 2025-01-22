@@ -1,4 +1,4 @@
-package com.example.movie
+package com.example.movie.model
 
 sealed class ListItem {
     data class MovieItem(

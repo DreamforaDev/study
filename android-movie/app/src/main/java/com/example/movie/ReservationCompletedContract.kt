@@ -1,6 +1,7 @@
 package com.example.movie
 
 import com.example.movie.model.Reservation
+import java.time.LocalDateTime
 
 interface ReservationCompletedContract {
     interface View {
@@ -10,8 +11,9 @@ interface ReservationCompletedContract {
     }
 
     interface Presenter {
-        fun saveReservation(movieTitle: String, theaterName: String, ticketNumber: Int)
+        fun showReservationDetails(movieTitle: String, theaterName: String, ticketNumber: Int, dateTime: LocalDateTime)
 
-        fun getReservationDetails(movieTitle: String, theaterName: String, ticketNumber: Int)
+        fun saveReservation(movieTitle: String, theaterName: String, ticketNumber: Int, dateTime: LocalDateTime)
+
     }
 }

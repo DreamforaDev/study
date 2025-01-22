@@ -1,19 +1,61 @@
 package com.example.movie
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import com.example.movie.model.Reservation
 import org.json.JSONArray
 import org.json.JSONObject
-import java.util.Locale
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class ReservationCompletedPresenter(
     private val view: ReservationCompletedContract.View,
     private val context: Context
 ) : ReservationCompletedContract.Presenter {
 
+    private fun setTicketPrice(ticketNumber: Int): Int {
+        return ticketNumber * 10_000
+    }
 
-    override fun saveReservation(movieTitle: String, theaterName: String, ticketNumber: Int) {
+    private fun buildReservation(
+        movieTitle: String,
+        theaterName: String,
+        ticketNumber: Int,
+        dateTime: LocalDateTime
+    ): Reservation {
+        val reservation = Reservation.build(
+            movieTitle = movieTitle,
+            theaterName = theaterName,
+            ticketNumber = ticketNumber,
+            ticketPrice = setTicketPrice(ticketNumber),
+            dateTime = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss"))
+        )
+        return reservation
+    }
+
+    override fun showReservationDetails(
+        movieTitle: String,
+        theaterName: String,
+        ticketNumber: Int,
+        dateTime: LocalDateTime
+    ) {
+        view.displayReservationDetails(
+            buildReservation(
+                movieTitle,
+                theaterName,
+                ticketNumber,
+                dateTime
+            )
+        )
+    }
+
+    override fun saveReservation(
+        movieTitle: String,
+        theaterName: String,
+        ticketNumber: Int,
+        dateTime: LocalDateTime
+    ) {
         val sharedPreferences =
             context.getSharedPreferences(
                 PreferenceKeys.SHARED_PREFERENCE_NAME.key,
@@ -21,12 +63,35 @@ class ReservationCompletedPresenter(
             )
         val edit = sharedPreferences.edit()
 
+        val (existingDataList, newReservation) = createReservationJson(
+            sharedPreferences,
+            dateTime,
+            theaterName,
+            movieTitle
+        )
+
+        existingDataList.put(newReservation)
+        edit.putString(PreferenceKeys.MOVIES_LIST.key, existingDataList.toString())
+        edit.apply()
+
+        Log.d("ReservationCompleted!", "Updated Data List : $existingDataList")
+        view.showToast("예매 성공!")
+    }
+
+    private fun createReservationJson(
+        sharedPreferences: SharedPreferences,
+        dateTime: LocalDateTime,
+        theaterName: String,
+        movieTitle: String
+    ): Pair<JSONArray, JSONObject> {
         val existingDataJson = sharedPreferences.getString(PreferenceKeys.MOVIES_LIST.key, "[]")
         val existingDataList = JSONArray(existingDataJson)
 
         val newReservation = JSONObject().apply {
-            put(PreferenceKeys.DATE.key, getCurrentFormattedDate())
-            put(PreferenceKeys.TIME.key, getCurrentFormattedTime())
+            put(
+                PreferenceKeys.DATE_TIME.key,
+                dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+            )
             put(
                 PreferenceKeys.THEATER_NAME.key,
                 theaterName
@@ -36,49 +101,6 @@ class ReservationCompletedPresenter(
                 movieTitle
             )
         }
-
-        existingDataList.put(newReservation)
-
-        Log.d("ReservationCompleted!", "Updated Data List : $existingDataList")
-        view.showToast("예매 성공!")
-
-        edit.putString(PreferenceKeys.MOVIES_LIST.key, existingDataList.toString())
-        edit.apply()
-    }
-
-    override fun getReservationDetails(movieTitle: String, theaterName: String, ticketNumber: Int) {
-        val ticketPrice = ticketNumber * 10_000
-        val formattedDate = getCurrentFormattedDate()
-        val formattedTime = getCurrentFormattedTime()
-
-        val reservation = Reservation(
-            movieTitle = movieTitle,
-            theaterName = theaterName,
-            ticketNumber = ticketNumber,
-            ticketPrice = ticketPrice,
-            formattedDate = formattedDate,
-            formattedTime = formattedTime
-        )
-
-        view.displayReservationDetails(reservation)
-    }
-
-    private fun getCurrentFormattedDate(): String {
-
-        val calendar = java.util.Calendar.getInstance()
-        val dateFormatter = java.text.SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
-        return dateFormatter.format(calendar.time)
-    }
-
-    private fun getCurrentFormattedTime(): String {
-        val calendar = java.util.Calendar.getInstance()
-        val timeFormatter = java.text.SimpleDateFormat(TIME_FORMAT, Locale.getDefault())
-        return timeFormatter.format(calendar.time)
-
-    }
-
-    companion object {
-        private const val DATE_FORMAT = "yyyy-MM-dd"
-        private const val TIME_FORMAT = "HH:mm"
+        return Pair(existingDataList, newReservation)
     }
 }

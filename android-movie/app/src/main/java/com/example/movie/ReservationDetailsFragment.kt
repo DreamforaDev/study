@@ -41,7 +41,7 @@ class ReservationDetailsFragment : Fragment(),ReservationDetailsContract.View {
         }
     }
 
-    override fun showReservedMovies(movies: List<ReservedMovie>) {
+    override fun displayReservedMovies(movies: List<ReservedMovie>) {
         adapter.submitList(movies)
         binding.emptyStateTv.visibility=View.GONE
         binding.reservationDetailsRecyclerview.visibility=View.VISIBLE

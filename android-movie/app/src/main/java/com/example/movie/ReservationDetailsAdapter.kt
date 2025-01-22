@@ -17,8 +17,7 @@ class ReservationDetailsAdapter
         fun bind(movie: ReservedMovie) {
             binding.tvMovieTitle.text = movie.movieTitle
             binding.tvTheaterName.text = movie.theaterName
-            binding.tvReservationDate.text = movie.date
-            binding.tvReservationTime.text = movie.time
+            binding.tvReservationDateTime.text = movie.dateTime
 
         }
     }
