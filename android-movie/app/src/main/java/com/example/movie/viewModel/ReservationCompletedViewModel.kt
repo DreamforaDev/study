@@ -13,7 +13,7 @@ import org.json.JSONObject
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+class ReservationCompletedViewModel(application: Application) : AndroidViewModel(application) {
     private val _reservation = MutableLiveData<Reservation>()
     val reservation: LiveData<Reservation> get() = _reservation
 

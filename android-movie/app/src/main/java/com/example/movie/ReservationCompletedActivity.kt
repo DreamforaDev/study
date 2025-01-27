@@ -9,12 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.movie.databinding.ActivityReservationCompletedBinding
-import com.example.movie.viewModel.MainViewModel
+import com.example.movie.viewModel.ReservationCompletedViewModel
 import java.time.LocalDateTime
 
 class ReservationCompletedActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReservationCompletedBinding
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: ReservationCompletedViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
