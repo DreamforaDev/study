@@ -4,23 +4,24 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.example.movie.databinding.ActivityReservationCompletedBinding
-import com.example.movie.model.Reservation
+import com.example.movie.viewModel.MainViewModel
 import java.time.LocalDateTime
 
-
-class ReservationCompletedActivity : AppCompatActivity(), ReservationCompletedContract.View {
-
+class ReservationCompletedActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReservationCompletedBinding
-    private lateinit var presenter: ReservationCompletedContract.Presenter
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityReservationCompletedBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        presenter = ReservationCompletedPresenter(this, this)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_reservation_completed)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
 
         binding.toolbar.btnBack.setOnClickListener {
             finish()
@@ -31,9 +32,19 @@ class ReservationCompletedActivity : AppCompatActivity(), ReservationCompletedCo
         val ticketNumber = intent.getIntExtra(EXTRA_TICKET_NUMBER, 1)
         val nowDateTime = LocalDateTime.now()
 
-        presenter.saveReservation(movieTitle, theaterName, ticketNumber, nowDateTime)
+        viewModel.setReservationDetails(movieTitle, theaterName, ticketNumber, nowDateTime)
 
-        presenter.showReservationDetails(movieTitle,theaterName,ticketNumber,nowDateTime)
+        viewModel.saveReservationToPref()
+
+        viewModel.toastMessage.observe(
+            this,
+            Observer {
+                    message ->
+                message?.let {
+                    Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+                }
+            },
+        )
     }
 
     companion object {
@@ -46,26 +57,12 @@ class ReservationCompletedActivity : AppCompatActivity(), ReservationCompletedCo
             movieTitle: String,
             theaterName: String,
             ticketNumber: Int? = null,
-        ):
-                Intent {
+        ): Intent {
             return Intent(context, ReservationCompletedActivity::class.java).apply {
                 putExtra(EXTRA_MOVIE_TITLE, movieTitle)
                 putExtra(EXTRA_THEATER_NAME, theaterName)
                 ticketNumber?.let { putExtra(EXTRA_TICKET_NUMBER, it) }
             }
         }
-    }
-
-    override fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun displayReservationDetails(reservation: Reservation) {
-        binding.tvTitle.text = reservation.movieTitle
-        binding.tvTheater.text = reservation.theaterName
-        binding.tvMoviegoer.text = getString(R.string.ticket_count_format, reservation.ticketNumber)
-        binding.tvTicketsPrice.text =
-            getString(R.string.ticket_price_format, reservation.ticketPrice)
-        binding.tvReservationDateTime.text = reservation.dateTime
     }
 }

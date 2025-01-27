@@ -10,12 +10,10 @@ import com.example.movie.databinding.ItemMovieBinding
 import com.example.movie.model.ListItem
 
 class MovieListAdapter(
-    private val listener: MovieListAdapterListener
+    private val listener: MovieListAdapterListener,
 ) : ListAdapter<ListItem, RecyclerView.ViewHolder>(diffUtil) {
-
     inner class MovieItemHolder(val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(item: ListItem.MovieItem) {
             binding.ivPoster.setImageResource(item.poster)
             binding.tvTitle.text = item.title
@@ -33,7 +31,6 @@ class MovieListAdapter(
     }
 
     inner class AdItemHolder(val binding: ItemAdBinding) : RecyclerView.ViewHolder(binding.root) {
-
         fun bind(item: ListItem.AdItem) {
             binding.imgAd.setImageResource(item.adImg)
 
@@ -50,8 +47,10 @@ class MovieListAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): RecyclerView.ViewHolder {
         val viewTypeEnum = MovieListItemViewType.fromInt(viewType)
         return when (viewTypeEnum) {
             MovieListItemViewType.MOVIE_ITEM -> {
@@ -63,12 +62,14 @@ class MovieListAdapter(
             MovieListItemViewType.AD_ITEM -> {
                 val view = ItemAdBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 AdItemHolder(view)
-
             }
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+    ) {
         when (val item = getItem(position)) {
             is ListItem.MovieItem -> (holder as MovieItemHolder).bind(item)
             is ListItem.AdItem -> (holder as AdItemHolder).bind(item)
@@ -76,15 +77,21 @@ class MovieListAdapter(
     }
 
     companion object {
+        val diffUtil =
+            object : DiffUtil.ItemCallback<ListItem>() {
+                override fun areItemsTheSame(
+                    oldItem: ListItem,
+                    newItem: ListItem,
+                ): Boolean {
+                    return oldItem == newItem
+                }
 
-        val diffUtil = object : DiffUtil.ItemCallback<ListItem>() {
-            override fun areItemsTheSame(oldItem: ListItem, newItem: ListItem): Boolean {
-                return oldItem == newItem
+                override fun areContentsTheSame(
+                    oldItem: ListItem,
+                    newItem: ListItem,
+                ): Boolean {
+                    return oldItem == newItem
+                }
             }
-
-            override fun areContentsTheSame(oldItem: ListItem, newItem: ListItem): Boolean {
-                return oldItem == newItem
-            }
-        }
     }
 }

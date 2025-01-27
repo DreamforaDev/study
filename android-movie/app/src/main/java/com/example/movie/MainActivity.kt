@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.movie.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,13 +15,12 @@ class MainActivity : AppCompatActivity() {
 
         setBottomNavigationView()
 
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             binding.bottomNavView.selectedItemId = R.id.home
         }
     }
 
     fun setBottomNavigationView() {
-
         binding.bottomNavView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {

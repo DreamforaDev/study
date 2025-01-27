@@ -22,7 +22,7 @@
     <string name="reservation_dateTime">%1$s %2$s</string>
 
     <string name="reservation_moviegoer_label">일반 </string>
-    <string name="reservation_moviegoer_data">0명</string>
+    <string name="reservation_moviegoer_data">%1$d명</string>
 
     <string name="ticket_count_format">%1$d명</string>
     <string name="ticket_price_format">%1$d원</string>
