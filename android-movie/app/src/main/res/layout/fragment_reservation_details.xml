@@ -6,9 +6,6 @@
         <variable
             name="vm"
             type="com.example.movie.viewModel.ReservationDetailsViewModel" />
-        <variable
-            name="adapter"
-            type="com.example.movie.ReservationDetailsAdapter" />
 
         <import type="android.view.View" />
     </data>
@@ -24,8 +21,8 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:visibility="@{vm.reservedMovies.size() == 0 ? View.VISIBLE : View.GONE}"
-            android:text="@string/reservation_details_empty_state_text"/>
+            android:text="@string/reservation_details_empty_state_text"
+            android:visibility="@{vm.reservedMovies.size() == 0 ? View.VISIBLE : View.GONE}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/reservation_details_recyclerview"
@@ -33,9 +30,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:visibility="@{vm.reservedMovies.size() > 0 ? View.VISIBLE : View.GONE}"
-            app:items = "@{vm.reservedMovies}"
-            />
-
+            app:items="@{vm.reservedMovies}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
     </LinearLayout>
 

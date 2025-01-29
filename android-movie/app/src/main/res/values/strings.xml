@@ -29,7 +29,7 @@
 
     <string name="reservation_seat_number">A1, A2</string>
     <string name="theater_name">OO 극장</string>
-    <string name="tickets_price">10,000원</string>
+    <string name="tickets_price_format">%1$d원</string>
     <string name="payment_method">(현장 결제)</string>
 
     <string name="blank_setting_fragment">setting fragment</string>

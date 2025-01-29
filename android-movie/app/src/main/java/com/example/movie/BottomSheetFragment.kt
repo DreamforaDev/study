@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.movie.databinding.FragmentBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import java.time.LocalDateTime
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentBottomSheetBinding
@@ -78,12 +79,14 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun navigationToCompletedPage(theaterName: String) {
+        val nowDateTime = LocalDateTime.now()
         val intent =
             ReservationCompletedActivity.createIntent(
                 requireContext(),
                 movieTitle,
                 theaterName,
-                ticketNumber,
+                ticketNumber ?: 1,
+                nowDateTime.toString(),
             )
         startActivity(intent)
         dismiss()

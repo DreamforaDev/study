@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.movie.databinding.FragmentHomeBinding
+import com.example.movie.databinding.FragmentMovieListBinding
 import com.example.movie.model.ListItem
 
 class MovieListFragment : Fragment(), MovieListAdapterListener {
-    private lateinit var binding: FragmentHomeBinding
+    private lateinit var binding: FragmentMovieListBinding
     private lateinit var movieListAdapter: MovieListAdapter
 
     override fun onCreateView(
@@ -20,7 +20,7 @@ class MovieListFragment : Fragment(), MovieListAdapterListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentMovieListBinding.inflate(inflater, container, false)
         return binding.root
     }
 

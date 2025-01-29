@@ -4,8 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.movie.databinding.ActivityMovieDetailBinding
 
 class MovieDetailActivity : AppCompatActivity() {
@@ -45,7 +43,7 @@ class MovieDetailActivity : AppCompatActivity() {
         }
 
         binding.cvMinusBtn.setOnClickListener {
-            if (ticketsCount > 1) return@setOnClickListener
+            if (ticketsCount < 2) return@setOnClickListener
             ticketsCount--
             updateTicketsCount()
         }
@@ -55,15 +53,9 @@ class MovieDetailActivity : AppCompatActivity() {
             updateTicketsCount()
         }
 
-        binding.tvReservationCompleteBtn.setOnClickListener {
+        binding.cvReservationBtn.setOnClickListener {
             val bottomSheetFragment = BottomSheetFragment.newInstanceToDetail(title, ticketsCount)
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
-        }
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
         }
     }
 
