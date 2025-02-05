@@ -5,5 +5,5 @@ enum class PreferenceKeys(val key: String) {
     MOVIES_LIST("movies_list"),
     DATE_TIME("date_time"),
     THEATER_NAME("theater_name"),
-    MOVIE_TITLE("movie_title");
+    MOVIE_TITLE("movie_title"),
 }

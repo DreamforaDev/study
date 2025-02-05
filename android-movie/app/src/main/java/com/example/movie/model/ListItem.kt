@@ -6,11 +6,11 @@ sealed class ListItem {
         val poster: Int,
         val title: String,
         val releaseTime: String,
-        val runtime: String
+        val runtime: String,
     ) : ListItem()
 
     data class AdItem(
         val adImg: Int,
-        val adUrl: String
+        val adUrl: String,
     ) : ListItem()
 }

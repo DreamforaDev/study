@@ -1,55 +1,42 @@
 package com.example.movie
 
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.movie.databinding.FragmentReservationDetailsBinding
-import com.example.movie.model.ReservedMovie
+import com.example.movie.viewModel.ReservationDetailsViewModel
 
-class ReservationDetailsFragment : Fragment(),ReservationDetailsContract.View {
-
+class ReservationDetailsFragment : Fragment() {
     private lateinit var binding: FragmentReservationDetailsBinding
     private lateinit var adapter: ReservationDetailsAdapter
-    private lateinit var presenter: ReservationDetailsContract.Presenter
+    private val viewModel: ReservationDetailsViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentReservationDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("ReservationDetailsFragment", "예매 내역 프래그먼트 뷰 생성됨")
 
-        setupRecyclerView()
-
-        presenter = ReservationDetailsPresenter(this,requireContext())
-        presenter.loadReservedMovies()
-    }
-
-    private fun setupRecyclerView() {
         adapter = ReservationDetailsAdapter()
-        binding.reservationDetailsRecyclerview.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = this@ReservationDetailsFragment.adapter
-        }
-    }
+        binding.reservationDetailsRecyclerview.adapter = adapter
 
-    override fun displayReservedMovies(movies: List<ReservedMovie>) {
-        adapter.submitList(movies)
-        binding.emptyStateTv.visibility=View.GONE
-        binding.reservationDetailsRecyclerview.visibility=View.VISIBLE
+        binding.vm = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
-    }
-
-    override fun showEmptyState() {
-        binding.emptyStateTv.visibility=View.VISIBLE
-        binding.reservationDetailsRecyclerview.visibility=View.GONE
+        viewModel.loadReservedMovies()
     }
 }

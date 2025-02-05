@@ -1,15 +1,14 @@
 package com.example.movie
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.movie.databinding.FragmentBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import java.time.LocalDateTime
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
-
     private lateinit var binding: FragmentBottomSheetBinding
 
     private lateinit var movieTitle: String
@@ -27,7 +26,10 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             return fragment
         }
 
-        fun newInstanceToDetail(movieTitle: String, ticketNumber: Int): BottomSheetFragment {
+        fun newInstanceToDetail(
+            movieTitle: String,
+            ticketNumber: Int,
+        ): BottomSheetFragment {
             val fragment = BottomSheetFragment()
             val args = Bundle()
             args.putString(ARG_MOVIE_TITLE, movieTitle)
@@ -45,12 +47,12 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 ticketNumber = it.getInt(ARG_TICKET_NUMBER)
             }
         }
-
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
 
@@ -77,13 +79,14 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun navigationToCompletedPage(theaterName: String) {
-
+        val nowDateTime = LocalDateTime.now()
         val intent =
             ReservationCompletedActivity.createIntent(
                 requireContext(),
                 movieTitle,
                 theaterName,
-                ticketNumber
+                ticketNumber ?: 1,
+                nowDateTime.toString(),
             )
         startActivity(intent)
         dismiss()

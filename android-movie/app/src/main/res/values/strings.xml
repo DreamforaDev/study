@@ -22,14 +22,14 @@
     <string name="reservation_dateTime">%1$s %2$s</string>
 
     <string name="reservation_moviegoer_label">일반 </string>
-    <string name="reservation_moviegoer_data">0명</string>
+    <string name="reservation_moviegoer_data">%1$d명</string>
 
     <string name="ticket_count_format">%1$d명</string>
     <string name="ticket_price_format">%1$d원</string>
 
     <string name="reservation_seat_number">A1, A2</string>
     <string name="theater_name">OO 극장</string>
-    <string name="tickets_price">10,000원</string>
+    <string name="tickets_price_format">%1$d원</string>
     <string name="payment_method">(현장 결제)</string>
 
     <string name="blank_setting_fragment">setting fragment</string>

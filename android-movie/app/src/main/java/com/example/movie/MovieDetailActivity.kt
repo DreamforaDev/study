@@ -3,14 +3,10 @@ package com.example.movie
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.movie.databinding.ActivityMovieDetailBinding
 
 class MovieDetailActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMovieDetailBinding
 
     private var ticketsCount: Int = 1
@@ -47,11 +43,9 @@ class MovieDetailActivity : AppCompatActivity() {
         }
 
         binding.cvMinusBtn.setOnClickListener {
-
-            if (ticketsCount > 1) return@setOnClickListener
+            if (ticketsCount < 2) return@setOnClickListener
             ticketsCount--
             updateTicketsCount()
-
         }
 
         binding.cvAddBtn.setOnClickListener {
@@ -59,15 +53,9 @@ class MovieDetailActivity : AppCompatActivity() {
             updateTicketsCount()
         }
 
-        binding.tvReservationCompleteBtn.setOnClickListener {
-            val bottomSheetFragment = BottomSheetFragment.newInstanceToDetail(title,ticketsCount)
+        binding.cvReservationBtn.setOnClickListener {
+            val bottomSheetFragment = BottomSheetFragment.newInstanceToDetail(title, ticketsCount)
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
-        }
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
         }
     }
 
@@ -88,9 +76,8 @@ class MovieDetailActivity : AppCompatActivity() {
             releaseTime: String,
             runtime: String,
             poster: Int,
-            seriesNumber: Int
-        ):
-                Intent {
+            seriesNumber: Int,
+        ): Intent {
             return Intent(context, MovieDetailActivity::class.java).apply {
                 putExtra(EXTRA_TITLE, movieTitle)
                 putExtra(EXTRA_RELEASE_TIME, releaseTime)
